@@ -19,6 +19,11 @@ This repository demonstrates the configuration and usage of Model Context Protoc
 - **Features**: Repository operations, issue tracking, PR management, branch operations
 - **Tool**: GitHub CLI (`gh` command) - No MCP server needed
 
+### 4. **Figma MCP (Framelink)**
+- **Purpose**: Design file integration and analysis via Figma API
+- **Features**: Access Figma designs, analyze layouts, implement UI components from designs
+- **Package**: `figma-developer-mcp` (9.6k stars, actively maintained)
+
 ## 📁 Configuration
 
 ### 🔒 Security Setup
@@ -36,6 +41,7 @@ This repository demonstrates the configuration and usage of Model Context Protoc
    - Replace `your-project-ref-here` with your Supabase project reference
    - Replace `your-db-password-here` with your Supabase database password
    - Replace `your-service-role-key-here` with your Supabase service role key
+   - Replace `your-figma-api-key-here` with your Figma Personal Access Token
 
 3. **Setup GitHub CLI** (separate from MCP):
    ```bash
@@ -47,7 +53,14 @@ This repository demonstrates the configuration and usage of Model Context Protoc
    gh auth login
    ```
 
-4. **Verify `.cursor/mcp.json` is ignored by Git** (already configured in .gitignore)
+4. **Create Figma API Token**:
+   - Go to [Figma Account Settings](https://www.figma.com/settings)
+   - Navigate to **Personal Access Tokens** section
+   - Click **Generate new token**
+   - Give it a descriptive name (e.g., "MCP Server Access")
+   - Copy the generated token and use it in your configuration
+
+5. **Verify `.cursor/mcp.json` is ignored by Git** (already configured in .gitignore)
 
 ### 📄 Configuration Files
 
@@ -65,13 +78,16 @@ The configuration includes:
    ```bash
    # Install Python-based Supabase MCP server
    pipx install supabase-mcp-server
+   
+   # Node.js is required for Figma MCP server (npx command)
+   # Most systems already have Node.js installed
    ```
 
 2. **Configure Environment Variables**:
    - `UPSTASH_CONTEXT7_TOKEN`: Your Upstash Context7 API token
    - `QUERY_API_KEY`: API key from thequery.dev
    - `SUPABASE_*`: Various Supabase configuration variables
-   - `GITHUB_TOKEN`: GitHub Personal Access Token
+   - `FIGMA_API_KEY`: Your Figma Personal Access Token
 
 3. **Restart Cursor IDE** to apply MCP server configurations
 
@@ -82,6 +98,7 @@ Once configured, you can test the MCP servers with prompts like:
 
 - **Context7**: "Show me React hooks documentation"
 - **Supabase**: "List all tables in my database"
+- **Figma**: "Analyze this Figma design: [paste Figma URL]" or "Implement this Figma component"
 
 ### GitHub CLI (via Terminal)
 Test GitHub CLI functionality directly:

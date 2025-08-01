@@ -16,6 +16,10 @@
         "SUPABASE_REGION": "us-east-1",
         "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key-here"
       }
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--figma-api-key=your-figma-api-key-here", "--stdio"]
     }
   }
 }
