@@ -14,10 +14,10 @@ This repository demonstrates the configuration and usage of Model Context Protoc
 - **Features**: SQL queries, table management, user authentication, real-time logs
 - **Package**: `supabase-mcp-server` (Python-based)
 
-### 3. **GitHub MCP** 
-- **Purpose**: Repository and issue management
+### 3. **GitHub CLI Integration** 
+- **Purpose**: Repository and issue management via GitHub CLI
 - **Features**: Repository operations, issue tracking, PR management, branch operations
-- **Package**: `@github/mcp-server@latest`
+- **Tool**: GitHub CLI (`gh` command) - No MCP server needed
 
 ## 📁 Configuration
 
@@ -36,9 +36,18 @@ This repository demonstrates the configuration and usage of Model Context Protoc
    - Replace `your-project-ref-here` with your Supabase project reference
    - Replace `your-db-password-here` with your Supabase database password
    - Replace `your-service-role-key-here` with your Supabase service role key
-   - Replace `your-github-personal-access-token-here` with your GitHub token
 
-3. **Verify `.cursor/mcp.json` is ignored by Git** (already configured in .gitignore)
+3. **Setup GitHub CLI** (separate from MCP):
+   ```bash
+   # Install GitHub CLI (if not already installed)
+   brew install gh  # macOS
+   # or visit https://cli.github.com for other platforms
+   
+   # Login to GitHub
+   gh auth login
+   ```
+
+4. **Verify `.cursor/mcp.json` is ignored by Git** (already configured in .gitignore)
 
 ### 📄 Configuration Files
 
@@ -66,19 +75,40 @@ The configuration includes:
 
 3. **Restart Cursor IDE** to apply MCP server configurations
 
-## 🧪 Testing MCP Servers
+## 🧪 Testing Your Setup
 
-Once configured, you can test the servers with prompts like:
+### MCP Servers (via Cursor)
+Once configured, you can test the MCP servers with prompts like:
 
 - **Context7**: "Show me React hooks documentation"
-- **Supabase**: "List all tables in my database"  
-- **GitHub**: "Show me my GitHub repositories"
+- **Supabase**: "List all tables in my database"
+
+### GitHub CLI (via Terminal)
+Test GitHub CLI functionality directly:
+
+```bash
+# Test GitHub CLI authentication
+gh auth status
+
+# List your repositories
+gh repo list
+
+# Create a new repository
+gh repo create my-new-repo --public --description "My new project"
+
+# View repository issues
+gh issue list
+
+# Create a new issue
+gh issue create --title "Bug report" --body "Description of the bug"
+```
 
 ## 🔒 Security Notes
 
 - All API keys and sensitive tokens are configured as environment variables
 - Supabase MCP includes safety modes to prevent destructive operations
-- GitHub token requires appropriate repository permissions
+- GitHub CLI uses secure OAuth authentication (no manual token management required)
+- `.gitignore` prevents accidental commit of sensitive configuration files
 
 ## 📚 Resources
 
@@ -86,6 +116,7 @@ Once configured, you can test the servers with prompts like:
 - [Cursor MCP Setup Guide](https://docs.cursor.com/context/mcp)
 - [Upstash Context7](https://upstash.com/docs/context7)
 - [Supabase MCP Server](https://github.com/alexander-zuev/supabase-mcp-server)
+- [GitHub CLI Documentation](https://cli.github.com/manual/)
 
 ---
 
