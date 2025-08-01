@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "upstash-context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "env": {
+        "UPSTASH_CONTEXT7_TOKEN": "your-upstash-context7-token-here"
+      }
+    },
+    "supabase": {
+      "command": "supabase-mcp-server",
+      "env": {
+        "QUERY_API_KEY": "your-query-api-key-here",
+        "SUPABASE_PROJECT_REF": "your-project-ref-here",
+        "SUPABASE_DB_PASSWORD": "your-db-password-here",
+        "SUPABASE_REGION": "us-east-1",
+        "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key-here"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@github/mcp-server@latest"],
+      "env": {
+        "GITHUB_TOKEN": "your-github-personal-access-token-here"
+      }
+    }
+  }
+}
