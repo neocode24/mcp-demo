@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hackathon - 부트캠프 시안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #0A0A0A;
+        }
+
+        /* 네비게이션 */
+        .nav {
+            background: #0F172B;
+            border-bottom: 1px solid #314158;
+            padding: 0 421px 1px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-brand-icon {
+            background: #9810FA;
+            color: white;
+            padding: 7px 14px;
+            border-radius: 8.75px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .nav-brand-text {
+            color: white;
+            font-weight: 700;
+            font-size: 17.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-item {
+            color: #D1D5DC;
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 8.75px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-item.active {
+            background: #9810FA;
+            color: white;
+        }
+
+        .nav-cta {
+            color: #D1D5DC;
+            font-size: 12.3px;
+            padding: 1.75px 0;
+        }
+
+        /* 히어로 섹션 */
+        .hero-section {
+            background: linear-gradient(135deg, #0F172B 0%, #59168B 50%, #0F172B 100%);
+            padding: 70px 400px 60.25px;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+            padding: 70px 21px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .hero-icon-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 21px;
+        }
+
+        .hero-icon {
+            background: white;
+            border-radius: 50px;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26.3px;
+        }
+
+        .hero-icon-bg {
+            background: #C27AFF;
+            width: 28px;
+            height: 28px;
+            border-radius: 50px;
+        }
+
+        .hero-title {
+            font-size: 63px;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            line-height: 1.25;
+        }
+
+        .hero-description {
+            font-size: 17.5px;
+            color: #D1D5DC;
+            text-align: center;
+            max-width: 588px;
+            line-height: 1.4;
+            padding-bottom: 14px;
+        }
+
+        .hero-button {
+            background: #9810FA;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15.8px;
+            transition: all 0.2s;
+        }
+
+        .hero-button:hover {
+            background: #7c0dd6;
+        }
+
+        /* 카드 그리드 */
+        .cards-grid {
+            display: flex;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .info-card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 29px;
+            backdrop-filter: blur(8px);
+        }
+
+        .info-card h3 {
+            color: white;
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .info-card p {
+            color: #D1D5DC;
+            font-size: 14px;
+            line-height: 1.625;
+        }
+
+        /* 대회 일정 카드 */
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 15px 29px 29px;
+            backdrop-filter: blur(8px);
+        }
+
+        .schedule-title {
+            color: white;
+            font-size: 26.3px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .schedule-grid {
+            display: flex;
+            gap: 21px;
+        }
+
+        .schedule-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10.5px;
+        }
+
+        .schedule-badge {
+            padding: 10.5px 14px;
+            border-radius: 8.75px;
+            text-align: center;
+        }
+
+        .schedule-badge.primary {
+            background: #9810FA;
+        }
+
+        .schedule-badge.secondary {
+            background: #314158;
+        }
+
+        .schedule-badge h4 {
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .schedule-badge p {
+            color: white;
+            font-size: 12.3px;
+        }
+
+        .schedule-description {
+            color: #D1D5DC;
+            font-size: 12.3px;
+            text-align: center;
+        }
+
+        /* 참가 안내 섹션 */
+        .guide-section {
+            background: #F9FAFB;
+            padding: 70px 400px;
+        }
+
+        .guide-container {
+            padding: 0 21px;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .guide-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 21px;
+        }
+
+        .guide-header p {
+            font-size: 17.5px;
+            color: #4A5565;
+            max-width: 588px;
+            margin: 0 auto;
+        }
+
+        .guide-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 42px;
+        }
+
+        .guide-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 14px;
+            padding: 29px;
+            box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 21px;
+        }
+
+        .guide-card-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 10.5px;
+            background: #9810FA;
+            border-radius: 4px;
+        }
+
+        .guide-card h3 {
+            color: #101828;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .guide-list {
+            list-style: none;
+        }
+
+        .guide-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            font-size: 14px;
+            color: #364153;
+        }
+
+        .guide-list li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #9810FA;
+            border-radius: 50%;
+            margin-right: 10.5px;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .guide-process {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .process-number {
+            width: 28px;
+            height: 28px;
+            background: #9810FA;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12.3px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .process-content h4 {
+            color: #101828;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3.5px;
+        }
+
+        .process-content p {
+            color: #4A5565;
+            font-size: 12.3px;
+        }
+
+        /* 중요 안내 리스트 */
+        .important-list li::before {
+            background: #FB2C36;
+        }
+
+        .important-list li:nth-child(2)::before {
+            background: #FF6900;
+        }
+
+        .important-list li:nth-child(3)::before {
+            background: #00C950;
+        }
+
+        .important-list li:nth-child(4)::before {
+            background: #2B7FFF;
+        }
+
+        .important-list li:nth-child(5)::before {
+            background: #AD46FF;
+        }
+
+        /* 신청 폼 섹션 */
+        .application-section {
+            background: linear-gradient(135deg, #F9FAFB 0%, #EFF6FF 100%);
+            padding: 70px 568px;
+        }
+
+        .form-container {
+            padding: 0 21px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .form-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 21px;
+        }
+
+        .form-header p {
+            font-size: 17.5px;
+            color: #4A5565;
+        }
+
+        .form-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .form-section {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12.75px;
+            padding: 21px;
+        }
+
+        .form-section h3 {
+            font-size: 21px;
+            color: #101828;
+            margin-bottom: 20.25px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20.25px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-label {
+            font-size: 12.3px;
+            font-weight: 500;
+            color: #0A0A0A;
+        }
+
+        .form-input {
+            padding: 8px 11.5px;
+            border-radius: 6.75px;
+            border: none;
+            background: #F3F3F5;
+            font-size: 12.3px;
+            color: #717182;
+            height: 31.5px;
+        }
+
+        .form-textarea {
+            padding: 8px 11.5px;
+            border-radius: 6.75px;
+            border: none;
+            background: #F3F3F5;
+            font-size: 12.3px;
+            color: #717182;
+            height: 56px;
+            resize: vertical;
+        }
+
+        .form-select {
+            padding: 8px 11.5px;
+            border-radius: 6.75px;
+            border: none;
+            background: #F3F3F5;
+            font-size: 12.3px;
+            color: #717182;
+            height: 31.5px;
+            cursor: pointer;
+        }
+
+        .add-member-btn {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6.75px;
+            padding: 7px 14px;
+            font-size: 12.3px;
+            font-weight: 500;
+            color: #0A0A0A;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5.25px;
+        }
+
+        .team-leader-section {
+            border: 1px solid #E5E7EB;
+            border-radius: 8.75px;
+            padding: 22px;
+            margin-top: 21px;
+        }
+
+        .team-leader-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #101828;
+            margin-bottom: 14px;
+        }
+
+        .member-fields {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding-top: 28px;
+        }
+
+        .submit-btn {
+            background: #9810FA;
+            color: white;
+            padding: 14px 42px;
+            border-radius: 50px;
+            border: none;
+            font-size: 15.8px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 14px;
+        }
+
+        .submit-note {
+            font-size: 12.3px;
+            color: #6A7282;
+        }
+
+        /* 신청 확인 섹션 */
+        .status-section {
+            background: #F9FAFB;
+            padding: 70px 568px 200px;
+        }
+
+        .status-container {
+            position: relative;
+            height: 438px;
+        }
+
+        .status-content {
+            position: absolute;
+            top: 0;
+            left: 21px;
+            width: 742px;
+        }
+
+        .status-header {
+            margin-bottom: 21px;
+        }
+
+        .status-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #101828;
+            margin-bottom: 21px;
+        }
+
+        .status-header p {
+            font-size: 17.5px;
+            color: #4A5565;
+        }
+
+        .status-form {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12.75px;
+            padding: 21px;
+            margin-bottom: 21px;
+        }
+
+        .status-form h3 {
+            display: flex;
+            align-items: center;
+            font-size: 21px;
+            color: #101828;
+            margin-bottom: 21px;
+        }
+
+        .status-form-icon {
+            width: 21px;
+            height: 21px;
+            margin-right: 7px;
+            background: #9810FA;
+            border-radius: 4px;
+        }
+
+        .status-form-row {
+            display: flex;
+            gap: 14px;
+            align-items: flex-end;
+        }
+
+        .status-input {
+            flex: 1;
+            padding: 8px 11.5px;
+            border-radius: 6.75px;
+            border: none;
+            background: #F3F3F5;
+            font-size: 12.3px;
+            color: #717182;
+            height: 31.5px;
+        }
+
+        .status-btn {
+            background: #9810FA;
+            color: white;
+            padding: 7px 21px;
+            border-radius: 6.75px;
+            border: none;
+            font-size: 12.3px;
+            font-weight: 500;
+            cursor: pointer;
+            height: 31.5px;
+        }
+
+        .status-info {
+            background: #EFF6FF;
+            border: 1px solid #BEDBFF;
+            border-radius: 12.75px;
+            padding: 21px;
+        }
+
+        .status-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1C398E;
+            margin-bottom: 7px;
+        }
+
+        .status-info ul {
+            list-style: none;
+        }
+
+        .status-info li {
+            font-size: 12.3px;
+            color: #193CB8;
+            margin-bottom: 3.5px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 1440px) {
+            .nav {
+                padding: 0 200px 1px;
+            }
+            
+            .hero-section {
+                padding: 70px 200px 60.25px;
+            }
+            
+            .guide-section {
+                padding: 70px 200px;
+            }
+            
+            .application-section {
+                padding: 70px 200px;
+            }
+            
+            .status-section {
+                padding: 70px 200px 200px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 0 50px 1px;
+            }
+            
+            .hero-section {
+                padding: 70px 50px 60.25px;
+            }
+            
+            .guide-section {
+                padding: 70px 50px;
+            }
+            
+            .application-section {
+                padding: 70px 50px;
+            }
+            
+            .status-section {
+                padding: 70px 50px 200px;
+            }
+            
+            .cards-grid {
+                flex-direction: column;
+            }
+            
+            .schedule-grid {
+                flex-direction: column;
+            }
+            
+            .guide-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px 1px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-section {
+                padding: 50px 20px 40px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .guide-section {
+                padding: 50px 20px;
+            }
+            
+            .guide-header h2 {
+                font-size: 32px;
+            }
+            
+            .application-section {
+                padding: 50px 20px;
+            }
+            
+            .status-section {
+                padding: 50px 20px 150px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .status-form-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .status-container {
+                position: static;
+                height: auto;
+            }
+            
+            .status-content {
+                position: static;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="nav-brand-icon">AI</div>
+                <div class="nav-brand-text">AI Hackathon</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-item active">대회 소개</a>
+                <a href="#guide" class="nav-item">참가 안내</a>
+                <a href="#application" class="nav-item">신청 및 접수</a>
+                <a href="#status" class="nav-item">신청 확인</a>
+            </div>
+            <div class="nav-cta">지금 참여하세요 →</div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-icon-section">
+                    <div class="hero-icon">
+                        🤖
+                    </div>
+                    <div class="hero-icon-bg"></div>
+                </div>
+                
+                <h1 class="hero-title">Ready for your next<br>AI Hackathon?</h1>
+                
+                <p class="hero-description">
+                    AI Coding 으로 혁신적인 솔루션을 만들어보세요.<br>
+                    창의적인 아이디어와 기술력을 겨루는 특별한 기회입니다.
+                </p>
+                
+                <a href="#application" class="hero-button">참가 신청하기</a>
+            </div>
+
+            <div class="cards-grid">
+                <div class="info-card">
+                    <h3>대회 목적</h3>
+                    <p>사내 개발자들의 AI Coding 역량강화를 통해 차세대 개발방법론의 기반을 마련합니다.</p>
+                </div>
+                <div class="info-card">
+                    <h3>대회 주제</h3>
+                    <p>"일상을 바꾸는 AI" - 생활 속에서 실제로 활용할 수 있는 AI 기반 솔루션을 개발하여 사용자 경험을 혁신해보세요.</p>
+                </div>
+                <div class="info-card">
+                    <h3>주최 및 주관</h3>
+                    <p><strong>주최:</strong> KT<br><strong>주관:</strong> 개발본부<br><strong>후원:</strong> CTO Office</p>
+                </div>
+            </div>
+
+            <div class="schedule-card">
+                <h2 class="schedule-title">대회 일정</h2>
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <div class="schedule-badge primary">
+                            <h4>참가 신청</h4>
+                            <p>~ 3/15(금)</p>
+                        </div>
+                        <p class="schedule-description">AI Coding에 관심이 있는 누구나</p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-badge secondary">
+                            <h4>서류 발표</h4>
+                            <p>3/18(월) ~ 3/20(수)</p>
+                        </div>
+                        <p class="schedule-description">100팀 선발</p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-badge secondary">
+                            <h4>예선</h4>
+                            <p>3/25(월) ~ 4/5(금)</p>
+                        </div>
+                        <p class="schedule-description">100팀 진행<br>AI Coding을 통한 온라인 예선</p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-badge secondary">
+                            <h4>결선(온라인)</h4>
+                            <p>4/8(월) ~ 4/12(금)</p>
+                        </div>
+                        <p class="schedule-description">상위 30팀 진출<br>AI Coding을 통한 온라인 결선</p>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-badge primary">
+                            <h4>결선(오프라인)</h4>
+                            <p>4/26(금) ~ 4/27(토)</p>
+                        </div>
+                        <p class="schedule-description">KT 판교빌딩에서<br>1박 2일 오프라인 결선</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 참가 안내 섹션 -->
+    <section id="guide" class="guide-section">
+        <div class="guide-container">
+            <div class="guide-header">
+                <h2>참가 안내</h2>
+                <p>AI 해커톤 참가를 위한 자세한 안내사항을 확인하세요</p>
+            </div>
+            
+            <div class="guide-cards">
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <div class="guide-card-icon"></div>
+                        <h3>참가 자격</h3>
+                    </div>
+                    <ul class="guide-list">
+                        <li>사내 임직원 누구나 (정규직, 계약직, 인턴 포함)</li>
+                        <li>AI Coding에 관심이 있는 모든 직군</li>
+                        <li>프로그래밍 경험이 있거나 학습 의지가 있는 자</li>
+                        <li>전체 일정에 성실히 참여 가능한 자</li>
+                    </ul>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <div class="guide-card-icon"></div>
+                        <h3>팀 구성</h3>
+                    </div>
+                    <ul class="guide-list">
+                        <li><strong>팀 규모:</strong> 1~4명 (개인 참가 가능)</li>
+                        <li><strong>팀 구성:</strong> 자유롭게 팀 구성 또는 개인 참가</li>
+                        <li><strong>팀 리더:</strong> 팀당 1명 지정 (대표 연락처)</li>
+                        <li><strong>권장 구성:</strong> 개발자 + 기획자 + 디자이너</li>
+                    </ul>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <div class="guide-card-icon"></div>
+                        <h3>신청 방법</h3>
+                    </div>
+                    <div class="guide-process">
+                        <div class="process-step">
+                            <div class="process-number">1</div>
+                            <div class="process-content">
+                                <h4>온라인 신청서 작성</h4>
+                                <p>팀 정보 및 참가자 정보 입력</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-number">2</div>
+                            <div class="process-content">
+                                <h4>아이디어 개요 제출</h4>
+                                <p>해결하고 싶은 문제와 접근 방법 간략히 기술</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="process-number">3</div>
+                            <div class="process-content">
+                                <h4>서약서 제출</h4>
+                                <p>개인정보 활용 동의 및 참가 규정 동의</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-card">
+                    <div class="guide-card-header">
+                        <div class="guide-card-icon"></div>
+                        <h3>주요 안내사항</h3>
+                    </div>
+                    <ul class="guide-list important-list">
+                        <li><strong>신청 마감:</strong> 2025년 3월 15일 (금) 18:00</li>
+                        <li><strong>선발 인원:</strong> 총 100팀 (선착순 아님, 서류 심사)</li>
+                        <li><strong>제공 사항:</strong> 개발 환경, 멘토링, 식사, 기념품</li>
+                        <li><strong>시상:</strong> 대상 1팀 (500만원), 우수상 2팀 (각 200만원)</li>
+                        <li><strong>문의:</strong> ai-hackathon@company.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 신청 및 접수 섹션 -->
+    <section id="application" class="application-section">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>신청 및 접수</h2>
+                <p>AI 해커톤에 참가하시려면 아래 정보를 입력해주세요</p>
+            </div>
+
+            <form class="form-sections">
+                <!-- 팀 정보 -->
+                <div class="form-section">
+                    <h3>팀 정보</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">팀명 *</label>
+                            <input type="text" class="form-input" placeholder="팀명을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">팀 구성</label>
+                            <select class="form-select">
+                                <option>팀 구성을 선택하세요</option>
+                                <option>개인 (1명)</option>
+                                <option>2명</option>
+                                <option>3명</option>
+                                <option>4명</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">팀 소개</label>
+                        <textarea class="form-textarea" placeholder="팀을 간단히 소개해주세요"></textarea>
+                    </div>
+                </div>
+
+                <!-- 팀원 정보 -->
+                <div class="form-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 21px;">
+                        <h3>팀원 정보</h3>
+                        <button type="button" class="add-member-btn">+ 팀원 추가</button>
+                    </div>
+                    
+                    <div class="team-leader-section">
+                        <h4>팀 리더</h4>
+                        <div class="member-fields">
+                            <div class="form-group">
+                                <label class="form-label">이름 *</label>
+                                <input type="text" class="form-input" placeholder="이름을 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">소속 부서 *</label>
+                                <input type="text" class="form-input" placeholder="부서명을 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">직급/직책</label>
+                                <input type="text" class="form-input" placeholder="직급 또는 직책을 입력하세요">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">이메일 *</label>
+                                <input type="email" class="form-input" placeholder="이메일을 입력하세요">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 아이디어 정보 -->
+                <div class="form-section">
+                    <h3>아이디어 정보</h3>
+                    <div class="form-group">
+                        <label class="form-label">아이디어 제목 *</label>
+                        <input type="text" class="form-input" placeholder="아이디어의 제목을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">해결하고자 하는 문제 *</label>
+                        <textarea class="form-textarea" placeholder="어떤 문제를 해결하고 싶으신가요? (300자 이내)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">솔루션 접근 방법 *</label>
+                        <textarea class="form-textarea" placeholder="어떤 방식으로 해결하실 계획인가요? (500자 이내)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">사용 예정 기술스택</label>
+                        <input type="text" class="form-input" placeholder="예: Python, TensorFlow, React, etc.">
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">참가 신청하기</button>
+                    <p class="submit-note">* 제출 후에도 마감일 전까지 수정이 가능합니다</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- 신청 확인 섹션 -->
+    <section id="status" class="status-section">
+        <div class="status-container">
+            <div class="status-content">
+                <div class="status-header">
+                    <h2>신청 확인</h2>
+                    <p>신청하신 정보를 확인하고 진행 상황을 조회하세요</p>
+                </div>
+
+                <div class="status-form">
+                    <h3>
+                        <div class="status-form-icon"></div>
+                        신청 조회
+                    </h3>
+                    <div class="status-form-row">
+                        <input type="text" class="status-input" placeholder="팀명 또는 이메일을 입력하세요">
+                        <button type="button" class="status-btn">조회하기</button>
+                    </div>
+                </div>
+
+                <div class="status-info">
+                    <h3>신청 조회 안내</h3>
+                    <ul>
+                        <li>• 신청 시 등록하신 팀명 또는 이메일로 조회 가능합니다</li>
+                        <li>• 서류 심사 결과는 3월 20일(수)에 개별 통보됩니다</li>
+                        <li>• 문의사항은 ai-hackathon@company.com으로 연락해주세요</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 스무스 스크롤링
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 네비게이션 활성화
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveNavItem() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}` || 
+                    (current === '' && item.getAttribute('href') === '#')) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavItem);
+
+        // 팀원 추가 기능
+        document.querySelector('.add-member-btn').addEventListener('click', function() {
+            const memberSection = document.querySelector('.team-leader-section');
+            const newMember = memberSection.cloneNode(true);
+            newMember.querySelector('h4').textContent = `팀원 ${document.querySelectorAll('.team-leader-section').length}`;
+            
+            // 입력 필드 초기화
+            newMember.querySelectorAll('.form-input').forEach(input => {
+                input.value = '';
+            });
+            
+            memberSection.parentNode.appendChild(newMember);
+        });
+
+        // 폼 제출 이벤트
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('신청이 완료되었습니다! 서류 심사 결과는 개별 통보됩니다.');
+        });
+
+        // 신청 조회 기능
+        document.querySelector('.status-btn').addEventListener('click', function() {
+            const input = document.querySelector('.status-input');
+            if (input.value.trim()) {
+                alert('조회 결과: 신청이 정상적으로 접수되었습니다.');
+            } else {
+                alert('팀명 또는 이메일을 입력해주세요.');
+            }
+        });
+    </script>
+</body>
+</html>
